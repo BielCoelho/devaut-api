@@ -1,0 +1,79 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Child {
+  id: ID!
+  name: String!
+  active: Boolean!
+  birthday: DateTime!
+  gender: GenderEnum!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""
+Available Genders types enum
+"""
+enum GenderEnum {
+  MALE
+  FEMALE
+  NOT_INFORMED
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  birthday: DateTime!
+  gender: GenderEnum!
+  phone: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CreateUser {
+  token: String!
+  user: User!
+}
+
+type Query {
+  testeUser: String!
+  getUserByID(id: String!): CreateUser!
+  me: CreateUser!
+  testeChild: String!
+}
+
+type Mutation {
+  authUser(data: AuthUserInput!): CreateUser!
+  createUser(data: CreateUserInput!): CreateUser!
+  updateUser(data: CreateUserInput!): CreateUser!
+  createChild(data: CreateChildInput!): Child!
+}
+
+input AuthUserInput {
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  birthday: DateTime!
+  gender: GenderEnum!
+  phone: String!
+  confirmPassword: String!
+}
+
+input CreateChildInput {
+  name: String!
+  gender: GenderEnum!
+  active: Boolean!
+  birthday: DateTime!
+}

@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String          @id @default(cuid())
+  name      String
+  email     String          @unique
+  password  String
+  birthday  DateTime
+  gender    Gender
+  phone     String?
+  addresses UserAddresses[]
+
+  role   Role?   @relation(fields: [roleId], references: [id])
+  roleId String?
+
+  profession   Professions? @relation(fields: [professionId], references: [id])
+  professionId String?
+
+  staffsChildren    StaffChildren[]
+  relativesChildren RelativeChildren[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Role {
+  id    String      @id @default(cuid())
+  name  RoleOptions @unique
+  users User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserAddresses {
+  id      String @id @default(cuid())
+  street  String
+  city    String
+  state   String
+  zipcode String
+  country String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Professions {
+  id    String @id @default(cuid())
+  title String @unique
+  users User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Child {
+  id       String   @id @default(cuid())
+  name     String
+  birthday DateTime
+  active   Boolean
+  gender   Gender
+
+  staffs    StaffChildren[]
+  relatives RelativeChildren[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StaffChildren {
+  id String @id @default(cuid())
+
+  staffUser   User   @relation(fields: [staffUserId], references: [id])
+  staffUserId String
+
+  child   Child  @relation(fields: [childId], references: [id])
+  childId String
+
+  @@map("StaffsChildren")
+}
+
+model RelativeChildren {
+  id String @id @default(cuid())
+
+  relative   User   @relation(fields: [relativeId], references: [id])
+  relativeId String
+
+  child   Child?  @relation(fields: [childId], references: [id])
+  childId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("RelativesChildren")
+}
+
+enum RoleOptions {
+  ADMIN
+  STAFF
+  PARENT
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NOT_INFORMED
+}
