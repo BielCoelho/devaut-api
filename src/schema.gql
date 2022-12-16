@@ -46,13 +46,15 @@ type Query {
   testeUser: String!
   getUserByID(id: String!): CreateUser!
   me: CreateUser!
-  testeChild: String!
+  getAllChildren: [Child!]!
+  getChildById(id: String!): Child!
+  getMyChildren: [Child!]!
 }
 
 type Mutation {
   authUser(data: AuthUserInput!): CreateUser!
   createUser(data: CreateUserInput!): CreateUser!
-  updateUser(data: CreateUserInput!): CreateUser!
+  updateUser(data: UpdateUserInput!): CreateUser!
   createChild(data: CreateChildInput!): Child!
 }
 
@@ -65,10 +67,18 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+  confirmPassword: String!
   birthday: DateTime!
   gender: GenderEnum!
   phone: String!
-  confirmPassword: String!
+}
+
+input UpdateUserInput {
+  id: String!
+  name: String!
+  birthday: DateTime!
+  gender: GenderEnum!
+  phone: String!
 }
 
 input CreateChildInput {

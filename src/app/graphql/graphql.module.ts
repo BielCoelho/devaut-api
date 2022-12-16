@@ -3,12 +3,10 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule as GQLModule } from '@nestjs/graphql';
 
 import { GraphQLError, GraphQLErrorExtensions } from 'graphql';
-import { PrismaService } from 'src/database/prisma/prisma.service';
 
-import { ChildResolver } from './modules/child/child.resolver';
-import { ChildService } from './modules/child/child.service';
-import { UserResolver } from './modules/user/user.resolver';
-import { UserService } from './modules/user/user.service';
+import { PrismaService } from 'database/prisma';
+import { ChildResolver, ChildService } from 'modules/child';
+import { UserResolver, UserService } from 'modules/user';
 
 interface IGQLError extends GraphQLError {
   extensions: GraphQLErrorExtensions & {

@@ -2,10 +2,10 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 
 import * as bcrypt from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { PrismaService } from 'src/database/prisma/prisma.service';
 
-import { AuthUserInput, CreateUserInput } from '../../inputs/user.inputs';
-import { UserWithToken } from '../../models/user.model';
+import { PrismaService } from 'database/prisma';
+import { CreateUserInput, AuthUserInput, UpdateUserInput } from 'inputs/user.inputs';
+import { UserWithToken } from 'models/user.model';
 
 @Injectable()
 export class UserService {
@@ -94,7 +94,7 @@ export class UserService {
     return users;
   }
 
-  async update(id: string, data: CreateUserInput) {
+  async update(id: string, data: UpdateUserInput) {
     const user = await this.prisma.user.findUnique({
       where: { id },
     });

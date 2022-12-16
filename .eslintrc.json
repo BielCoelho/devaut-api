@@ -29,7 +29,13 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["/^@/", "module", ["parent", "sibling", "index"]],
+        "groups": [
+          "/^@/",
+          "/^graphql/",
+          "module",
+          ["/database/", "/inputs/", "/models/", "/modules/", "/guards/", "/application/"],
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true

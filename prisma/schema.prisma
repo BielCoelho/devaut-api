@@ -17,7 +17,7 @@ model User {
   email     String          @unique
   password  String
   birthday  DateTime
-  gender    Gender
+  gender    GenderOptions
   phone     String?
   addresses UserAddresses[]
 
@@ -68,11 +68,11 @@ model Professions {
 }
 
 model Child {
-  id       String   @id @default(cuid())
+  id       String        @id @default(cuid())
   name     String
   birthday DateTime
   active   Boolean
-  gender   Gender
+  gender   GenderOptions
 
   staffs    StaffChildren[]
   relatives RelativeChildren[]
@@ -114,7 +114,7 @@ enum RoleOptions {
   PARENT
 }
 
-enum Gender {
+enum GenderOptions {
   MALE
   FEMALE
   NOT_INFORMED

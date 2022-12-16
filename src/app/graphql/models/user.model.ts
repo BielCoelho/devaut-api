@@ -1,19 +1,6 @@
-import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import { GenderEnum } from './gender.model';
-
-// import { GenderEnum } from './gender.model';
-
-export enum RolesEnum {
-  ADMIN = 'ADMIN',
-  STAFF = 'STAFF',
-  PARENT = 'PARENT',
-}
-
-registerEnumType(RolesEnum, {
-  name: 'RolesEnum',
-  description: 'Available Roles types enum',
-});
 
 @ObjectType('User')
 export class User {

@@ -2,7 +2,8 @@ import { CanActivate, ExecutionContext, Injectable, NotFoundException, Unauthori
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { verify } from 'jsonwebtoken';
-import { PrismaService } from 'src/database/prisma/prisma.service';
+
+import { PrismaService } from 'database/prisma';
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate {

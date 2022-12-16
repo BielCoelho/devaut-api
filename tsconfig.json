@@ -9,7 +9,15 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
+    "paths": {
+      "application": ["./app/graphql"],
+      "inputs/*": ["./app/graphql/inputs/*"],
+      "guards/*": ["./app/graphql/guards/*"],
+      "models/*": ["./app/graphql/models/*"],
+      "modules/*": ["./app/graphql/modules/*"],
+      "database/*": ["./database/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

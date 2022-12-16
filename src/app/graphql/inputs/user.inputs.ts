@@ -14,6 +14,9 @@ export class CreateUserInput {
   password: string;
 
   @Field()
+  confirmPassword: string;
+
+  @Field()
   birthday: Date;
 
   @Field(() => GenderEnum)
@@ -21,9 +24,24 @@ export class CreateUserInput {
 
   @Field()
   phone: string;
+}
+
+@InputType()
+export class UpdateUserInput {
+  @Field()
+  id: string;
 
   @Field()
-  confirmPassword: string;
+  name?: string;
+
+  @Field()
+  birthday?: Date;
+
+  @Field(() => GenderEnum)
+  gender?: GenderEnum;
+
+  @Field()
+  phone?: string;
 }
 
 @InputType()
