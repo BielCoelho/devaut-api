@@ -1,13 +1,13 @@
-FROM node:lts-alpine
+FROM node:lts
 
 WORKDIR /usr/app/devault
 
 COPY package*.json ./
 
-RUN yarn
+RUN npm install
 
 COPY . .
 
-EXPOSE 3333
+EXPOSE 4000
 
-CMD ["yarn", "start:dev"]
+CMD ["npm", "run", "start:dev"]
